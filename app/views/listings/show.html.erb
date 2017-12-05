@@ -1,0 +1,31 @@
+<h1><%= @listing.title %> </h1>
+<ul>
+<li>Address: <%= @listing.address %></li>
+<li>Listing Type: <%= @listing.listing_type %></li>
+<li>Description: <%= @listing.description %></li>
+<li>Price: $<%= @listing.price %></li>
+<li>Host: <%= @listing.host.name %></li>
+<li>Average Review Rating: <%= @listing.average_review_rating %></li>
+</ul>
+
+<h1>Make a Reservation</h1>
+<%= form_for @reservation do |f| %>
+  <%= hidden_field_tag "reservation[listing_id]", @listing.id %>
+  <%= f.label :guest %>
+  <%= f.collection_select :guest_id, User.all, :id, :name %>
+  <%= f.label :checkin %>
+  <%= f.date_field(:check_in) %>
+  <%= f.label :checkout %>
+  <%= f.date_field(:check_out) %>
+  <%= f.submit %>
+<% end %>
+
+
+<h2>Here are the reviews for this listing:</h2>
+<ul>
+<% @reviews.each do |review| %>
+  <li><%= review.rating %></li>
+  <li><%= review.description %></li>
+  <li><%= review.guest.name %></li>
+  <% end %>
+</ul>

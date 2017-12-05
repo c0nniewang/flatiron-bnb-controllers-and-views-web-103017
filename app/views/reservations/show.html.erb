@@ -1,0 +1,19 @@
+Your reservation has been created.
+You owe us $<%= @price %>.
+
+Would you like to write a review?
+
+<h1>Write a Review</h1>
+
+<%= form_for @review do |f| %>
+  <%= f.label @reservation.listing.title %><br>
+  <%= f.label :rating %>
+  <%= f.text_field :rating %><br>
+  <%= f.label :guest %>
+  <%= @reservation.guest.name %><br>
+  <%= hidden_field_tag "review[guest_id]", @reservation.guest.id %>
+  <%= hidden_field_tag "review[reservation_id]", @reservation.id %>
+  <%= f.label :description %><br>
+  <%= f.text_area :description %><br>
+  <%= f.submit %>
+<% end %>

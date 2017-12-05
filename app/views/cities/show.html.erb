@@ -1,0 +1,22 @@
+<h1><%= @city.name %></h1>
+<ul>
+<% @city.neighborhoods.each do |neighborhood| %>
+<li><%= link_to neighborhood.name, neighborhood_path(neighborhood) %></li>
+<% end %>
+</ul>
+
+<h1>All <%= @city.name %> Listings</h1>
+<ul>
+<% @city.neighborhoods.each do |neighborhood| %>
+<% neighborhood.listings.each do |listing| %>
+<li><%= link_to listing.title, listing_path(listing) %></li>
+<% end %>
+<% end %>
+</ul>
+
+<h1>Filter By Availability</h1>
+<%= form_tag("#{city_path(@city)}/filter") do %>
+Start Date: <%= date_field(:dates, :start_date) %>
+End Date: <%= date_field(:dates, :end_date) %>
+<%= submit_tag "Filter by Date" %>
+<% end %>

@@ -1,0 +1,6 @@
+<h1><%= @neighborhood.name %> Listings</h1>
+<ul>
+<% @neighborhood.listings.each do |listing| %>
+  <li><%= link_to listing.title, listing_path(listing)%> </li>
+<% end %>
+</ul>
